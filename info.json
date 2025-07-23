@@ -1,0 +1,9 @@
+{
+  "name": "disable-surface-change",
+  "version": "1.0.0",
+  "title": "Disable Surface Change from Map Editor",
+  "author": "arcbyte",
+  "factorio_version": "2.0",
+  "description": "Removes the ability to change surfaces from the Map Editor mod.",
+  "dependencies": ["base >= 1.1.0", "?EditorExtensions"]
+}
