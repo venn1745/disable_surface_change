@@ -1,5 +1,5 @@
 local ORIGINAL_SURFACE_PREFIX = "EE_TESTSURFACE_player"
-local RENAMED_SURFACE_NAME = "Testing Lab"
+local RENAMED_SURFACE_NAME = "lonelylab"
 
 local function rename_testing_lab_surface()
   for _, surface in pairs(game.surfaces) do
@@ -36,4 +36,5 @@ script.on_event(defines.events.on_player_joined_game, function(event)
 end)
 
 script.on_init(rename_testing_lab_surface)
+
 script.on_configuration_changed(function(_) rename_testing_lab_surface() end)
