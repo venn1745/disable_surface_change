@@ -1,4 +1,4 @@
-local ORIGINAL_SURFACE_PREFIX = "EE_TESTSURFACE_player"
+local ORIGINAL_SURFACE_PREFIX = "EE_TESTSURFACE_"
 local RENAMED_SURFACE_NAME = "lonelylab"
 
 local function rename_testing_lab_surface()
@@ -15,26 +15,17 @@ local function is_in_map_editor(player)
   return player and player.valid and player.controller_type == defines.controllers.editor
 end
 
-script.on_event(defines.events.on_player_changed_surface, function(event)
-  local player = game.get_player(event.player_index)
-  if not player then return end
+script.on_event(defines.events.on_tick, function(event)
+  if event.tick % 60 ~= 0 then return end
 
-  if is_in_map_editor(player) then
-    if player.surface.name ~= RENAMED_SURFACE_NAME then
-      player.print("[Surface Lock] Surface switching is disabled in the map editor. Reverting to Testing Lab.")
+  for _, player in pairs(game.connected_players) do
+    if is_in_map_editor(player) and player.surface.name ~= RENAMED_SURFACE_NAME then
       player.teleport({0, 0}, RENAMED_SURFACE_NAME)
+      player.print("You have been moved to the Testing Lab.")
     end
   end
 end)
 
-script.on_event(defines.events.on_player_joined_game, function(event)
-  local player = game.get_player(event.player_index)
-  if player and is_in_map_editor(player) and player.surface.name ~= RENAMED_SURFACE_NAME then
-    player.teleport({0, 0}, RENAMED_SURFACE_NAME)
-    player.print("[Surface Lock] You have been moved to the Testing Lab.")
-  end
-end)
-
+-- Rename surfaces on init/config change
 script.on_init(rename_testing_lab_surface)
-
 script.on_configuration_changed(function(_) rename_testing_lab_surface() end)
