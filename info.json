@@ -1,5 +1,5 @@
 {
-  "name": "disable-surface-change",
+  "name": "disable_surface_change",
   "version": "1.0.0",
   "title": "Disable Surface Change from Map Editor",
   "author": "arcbyte",
@@ -7,3 +7,4 @@
   "description": "Removes the ability to change surfaces from the Map Editor mod.",
   "dependencies": ["base >= 1.1.0", "?EditorExtensions"]
 }
+
